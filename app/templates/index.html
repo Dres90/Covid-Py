@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Covid-19 Report</h1>
+    <div class="text-right">
+        <span>Last Updated: {{ updated }}</span>
+    </div>
+    <table class="table table-hover">
+        <tr>
+            <th class="text-center">
+                Country
+            </th>
+            <th class="text-center">
+                Flag
+            </th>
+            <th class="text-center">
+                Cases
+            </th>
+            <th class="text-center">
+                Deaths
+            </th>
+            <th class="text-center">
+                Recovered
+            </th>
+            <th class="text-center">
+                Cases Last Day
+            </th>
+            <th class="text-center">
+                Deaths Last Day
+            </th>
+        </tr>
+        {% for report in reports %}
+            {% include '_report.html' %}
+        {% endfor %}
+    </table>
+    
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span>Previous Page
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    Next Page<span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <span>Data source: <a href="https://www.covidvisualizer.com/">Covid Visualizer, N. Mamoon & G. Rasskin</a></span>
+{% endblock %}
